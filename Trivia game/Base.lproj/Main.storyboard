@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -9,16 +12,92 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Trivia_game" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1eP-aq-RiD">
+                                <rect key="frame" x="0.0" y="20" width="375" height="158"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="158" id="6jy-0d-GyY"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tbb-g8-BFY">
+                                <rect key="frame" x="93" y="203" width="189" height="66"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="66" id="d9W-P0-TuT"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="buttonOnePressed:" destination="BYZ-38-t0r" eventType="touchDown" id="BUt-jm-XH9"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g4T-Sj-WSQ">
+                                <rect key="frame" x="93" y="294" width="189" height="66"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="66" id="JBL-MS-xXr"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="buttonTwoPressed:" destination="BYZ-38-t0r" eventType="touchDown" id="Fbw-sf-8Vk"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IcF-R1-cvO">
+                                <rect key="frame" x="93" y="385" width="189" height="66"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="66" id="6XD-z7-ClV"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="buttonThreePressed:" destination="BYZ-38-t0r" eventType="touchDown" id="fBC-43-2g3"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lJ3-P3-w1e">
+                                <rect key="frame" x="93" y="476" width="189" height="66"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="66" id="2wv-Uk-t1q"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="buttonFourPressed:" destination="BYZ-38-t0r" eventType="touchDown" id="r0e-AO-Gyj"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="IcF-R1-cvO" secondAttribute="trailing" constant="93" id="3sv-vr-HhM"/>
+                            <constraint firstItem="lJ3-P3-w1e" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="93" id="7Y6-4y-HkM"/>
+                            <constraint firstItem="IcF-R1-cvO" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="93" id="D9F-Zl-kNJ"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="g4T-Sj-WSQ" secondAttribute="trailing" constant="93" id="MLG-hS-vMF"/>
+                            <constraint firstItem="g4T-Sj-WSQ" firstAttribute="top" secondItem="tbb-g8-BFY" secondAttribute="bottom" constant="25" id="Qn6-ff-Mex"/>
+                            <constraint firstItem="1eP-aq-RiD" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="VQe-jd-paA"/>
+                            <constraint firstItem="tbb-g8-BFY" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="93" id="VbW-80-qN5"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="lJ3-P3-w1e" secondAttribute="trailing" constant="93" id="ZMa-38-feK"/>
+                            <constraint firstItem="IcF-R1-cvO" firstAttribute="top" secondItem="g4T-Sj-WSQ" secondAttribute="bottom" constant="25" id="d54-8b-lMv"/>
+                            <constraint firstItem="g4T-Sj-WSQ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="93" id="gTO-cX-aGx"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="1eP-aq-RiD" secondAttribute="trailing" id="kWE-Qw-3xG"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="tbb-g8-BFY" secondAttribute="trailing" constant="93" id="ruN-0w-bGV"/>
+                            <constraint firstItem="lJ3-P3-w1e" firstAttribute="top" secondItem="IcF-R1-cvO" secondAttribute="bottom" constant="25" id="sqH-nr-1n6"/>
+                            <constraint firstItem="1eP-aq-RiD" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="xeq-ii-2R0"/>
+                            <constraint firstItem="tbb-g8-BFY" firstAttribute="top" secondItem="1eP-aq-RiD" secondAttribute="bottom" constant="25" id="y9c-5m-8hw"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="buttonFour" destination="lJ3-P3-w1e" id="oFz-gO-X7m"/>
+                        <outlet property="buttonOne" destination="tbb-g8-BFY" id="8Qe-sU-c3J"/>
+                        <outlet property="buttonThree" destination="IcF-R1-cvO" id="EUb-ik-RTp"/>
+                        <outlet property="buttonTwo" destination="g4T-Sj-WSQ" id="atQ-PR-Y2O"/>
+                        <outlet property="questionLabel" destination="1eP-aq-RiD" id="rZT-lk-vG6"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="136.80000000000001" y="133.5832083958021"/>
         </scene>
     </scenes>
 </document>

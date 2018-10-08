@@ -7,7 +7,7 @@
 //
 
 import Foundation
-class Answer {
+class Answer: NSObject, NSCoding {
     let displayName: String
     let isCorrect: Bool
 
@@ -19,7 +19,15 @@ class Answer {
         self.displayName = displayName
         self.isCorrect = isCorrect
     }
-    
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(self.displayName, forKey: "displayName")
+        aCoder.encode(self.isCorrect, forKey: "isCorrect")
+    }
+    convenience required init?(coder aDecoder: NSCoder) {
+        let displayName =  aDecoder.decodeObject(forKey: "displayName") as! String
+        let isCorrect = aDecoder.decodeBool(forKey: "isCorrect")
+        self.init(displayName: displayName, isCorrect: isCorrect)
+    }
     
     
     
