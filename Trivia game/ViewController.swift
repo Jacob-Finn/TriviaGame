@@ -9,7 +9,7 @@ class ViewController: UIViewController {
     var buttonTwoCorrect = false    // which one of the buttons is correct.
     var buttonThreeCorrect = false
     var buttonFourCorrect = false
-    
+    @IBOutlet weak var containerView: UIView!
     
     //-------- --------- --------- --------- ----------//
     
@@ -26,27 +26,44 @@ class ViewController: UIViewController {
             questionLabel.text = questionLabelText
         }
     }
+    @IBOutlet weak var navigationBar: UINavigationItem!
+    
     //-------- --------- --------- --------- ----------//
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         let basicQuestionSet = QuestionSet.init(
-            firstAnswer: Answer.init(displayName: "testing", isCorrect: true),
+            firstAnswer: Answer.init(displayName: "tester1", isCorrect: true),
             secondAnswer: Answer.init(displayName: "tester2"),
             thirdAnswer: Answer.init(displayName: "tester3"),
-            fourthAnswer: Answer.init(displayName: "tester4"))
+            fourthAnswer: Answer.init(displayName: "tester4"),
+            displayDescription: "This is a first basic question. Press the first button to continue!")
+        let basicQuestionSetTwo = QuestionSet.init(
+            firstAnswer: Answer.init(displayName: "5"),
+            secondAnswer: Answer.init(displayName: "13"),
+            thirdAnswer: Answer.init(displayName: "60", isCorrect: true),
+            fourthAnswer: Answer.init(displayName: "80"),
+            displayDescription: "How many minutes are in an hour?")
         QuestionManager.addQuestionSet(QuestionSet: basicQuestionSet)
+        QuestionManager.addQuestionSet(QuestionSet: basicQuestionSetTwo)
+        // These are debug variables. Remove them later!
         DataManager.saveData(questionSetArray: QuestionManager.questionSetArray)
-        print(buttonOneCorrect)
-        print(buttonTwoCorrect)
-        print(buttonThreeCorrect)
-        print(buttonFourCorrect)
         setup()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.barStyle = UIBarStyle.blackTranslucent
+        self.navigationController?.navigationBar.barTintColor  = UIColor.white
+        view.backgroundColor = UIColor.white
+        
+    }
     
     func setup() {
         if selection <= (QuestionManager.questionSetArray.count - 1) {
+            questionLabel.text = QuestionManager.questionSetArray[selection].displayDescription
             buttonOneCorrect = false
             buttonTwoCorrect = false
             buttonThreeCorrect = false
@@ -77,62 +94,77 @@ class ViewController: UIViewController {
                     }
                 }
             }
+            fadeIn()
         }
     }
     
     @IBAction func buttonOnePressed(_ sender: Any) {
         if buttonOneCorrect == true {
-            view.backgroundColor = UIColor.green
-            selection += 1
-            setup()
+            setCorrectColor()
         } else {
-            view.backgroundColor = UIColor.red
+            setWrongColor()
         }
     }
     
     @IBAction func buttonTwoPressed(_ sender: Any) {
         if buttonTwoCorrect == true {
-            view.backgroundColor = UIColor.green
-            selection += 1
-            setup()
+            setCorrectColor()
         } else {
-            view.backgroundColor = UIColor.red
+            setWrongColor()
         }
     }
     
     @IBAction func buttonThreePressed(_ sender: Any) {
         if buttonThreeCorrect {
-            view.backgroundColor = UIColor.green
-            selection += 1
-            setup()
+            setCorrectColor()
         } else {
-            view.backgroundColor = UIColor.red
+            setWrongColor()
         }
     }
     
     @IBAction func buttonFourPressed(_ sender: Any) {
         if buttonFourCorrect {
-            view.backgroundColor = UIColor.green
-            selection += 1
-            setup()
+            setCorrectColor()
         } else {
-            view.backgroundColor = UIColor.red
+            setWrongColor()
+            
         }
     }
     
+    func setCorrectColor() {
+        view.backgroundColor = UIColor.green
+        self.navigationController?.navigationBar.barStyle = UIBarStyle.blackTranslucent
+        self.navigationController?.navigationBar.barTintColor  = UIColor.green
+        selection += 1
+        print("correct")
+        fadeOut()
+    }
+    func setWrongColor() {
+        view.backgroundColor = UIColor.red
+        self.navigationController?.navigationBar.barStyle = UIBarStyle.blackTranslucent
+        self.navigationController?.navigationBar.barTintColor  = UIColor.red
+    }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    func fadeOut() {
+        let animator = UIViewPropertyAnimator(duration: 1, curve: .easeInOut)
+        animator.addAnimations {
+            self.containerView.alpha = 0.0
+        }
+        animator.addCompletion() {
+            _ in
+            self.setup()
+        }
+        animator.startAnimation()
+    }
+    func fadeIn() {
+        let animator = UIViewPropertyAnimator(duration: 1, curve: .easeInOut)
+        print("Adding animation")
+        animator.addAnimations {
+            self.containerView.alpha = 1.0
+        }
+        print("starting animation")
+        animator.startAnimation()
+    }
     
 }
 
