@@ -8,8 +8,8 @@
 
 import Foundation
 class Answer: NSObject, NSCoding {
-    let displayName: String
-    let isCorrect: Bool
+    var displayName: String
+    var isCorrect: Bool
 
     init(displayName: String) {
         self.displayName = displayName

@@ -34,35 +34,40 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let basicQuestionSet = QuestionSet.init(
-            firstAnswer: Answer.init(displayName: "tester1", isCorrect: true),
-            secondAnswer: Answer.init(displayName: "tester2"),
-            thirdAnswer: Answer.init(displayName: "tester3"),
-            fourthAnswer: Answer.init(displayName: "tester4"),
-            displayDescription: "This is a first basic question. Press the first button to continue!")
-        let basicQuestionSetTwo = QuestionSet.init(
-            firstAnswer: Answer.init(displayName: "5"),
-            secondAnswer: Answer.init(displayName: "13"),
-            thirdAnswer: Answer.init(displayName: "60", isCorrect: true),
-            fourthAnswer: Answer.init(displayName: "80"),
-            displayDescription: "How many minutes are in an hour?")
-        QuestionManager.addQuestionSet(QuestionSet: basicQuestionSet)
-        QuestionManager.addQuestionSet(QuestionSet: basicQuestionSetTwo)
-        // These are debug variables. Remove them later!
-        DataManager.saveData(questionSetArray: QuestionManager.questionSetArray)
+        guard let questionSetArray = DataManager.loadData() else {
+            print("Nothing found create default")
+            let basicQuestionSet = QuestionSet.init(
+                firstAnswer: Answer.init(displayName: "tester1", isCorrect: true),
+                secondAnswer: Answer.init(displayName: "tester2"),
+                thirdAnswer: Answer.init(displayName: "tester3"),
+                fourthAnswer: Answer.init(displayName: "tester4"),
+                displayDescription: "This is a first basic question. Press the first button to continue!")
+            let basicQuestionSetTwo = QuestionSet.init(
+                firstAnswer: Answer.init(displayName: "5"),
+                secondAnswer: Answer.init(displayName: "13"),
+                thirdAnswer: Answer.init(displayName: "60", isCorrect: true),
+                fourthAnswer: Answer.init(displayName: "80"),
+                displayDescription: "How many minutes are in an hour?")
+            QuestionManager.addQuestionSet(QuestionSet: basicQuestionSet)
+            QuestionManager.addQuestionSet(QuestionSet: basicQuestionSetTwo)
+            DataManager.saveData(questionSetArray: QuestionManager.questionSetArray)
+            return
+        }
+        QuestionManager.questionSetArray = questionSetArray as! [QuestionSet]
         setup()
     }
     
+    
+    
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.navigationBar.barStyle = UIBarStyle.blackTranslucent
-        self.navigationController?.navigationBar.barTintColor  = UIColor.white
-        view.backgroundColor = UIColor.white
-        
     }
     
     func setup() {
         if selection <= (QuestionManager.questionSetArray.count - 1) {
+            self.view.backgroundColor = UIColor.white
+            self.navigationController?.navigationBar.barTintColor  = UIColor.white
             questionLabel.text = QuestionManager.questionSetArray[selection].displayDescription
             buttonOneCorrect = false
             buttonTwoCorrect = false
@@ -133,7 +138,6 @@ class ViewController: UIViewController {
     
     func setCorrectColor() {
         view.backgroundColor = UIColor.green
-        self.navigationController?.navigationBar.barStyle = UIBarStyle.blackTranslucent
         self.navigationController?.navigationBar.barTintColor  = UIColor.green
         selection += 1
         print("correct")
@@ -141,7 +145,6 @@ class ViewController: UIViewController {
     }
     func setWrongColor() {
         view.backgroundColor = UIColor.red
-        self.navigationController?.navigationBar.barStyle = UIBarStyle.blackTranslucent
         self.navigationController?.navigationBar.barTintColor  = UIColor.red
     }
     
@@ -158,11 +161,9 @@ class ViewController: UIViewController {
     }
     func fadeIn() {
         let animator = UIViewPropertyAnimator(duration: 1, curve: .easeInOut)
-        print("Adding animation")
         animator.addAnimations {
             self.containerView.alpha = 1.0
         }
-        print("starting animation")
         animator.startAnimation()
     }
     
