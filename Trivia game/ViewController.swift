@@ -56,7 +56,7 @@ class ViewController: UIViewController {
         }
         userStats = savedUserStats
         print("Found saved data")
-        if QuestionManager.questionSetArray.count == 0 || QuestionManager.masterQuestionSetArray.count == 0 { //If somehow the data base still manages to get wiped
+        if QuestionManager.questionSetArray.count == 0 { //If somehow the data base still manages to get wiped
             generateBaseQuestions() // we will generate the base questions again.
             setup()
         } else {
@@ -221,6 +221,7 @@ class ViewController: UIViewController {
     
     
     func generateBaseQuestions () {
+        print("Generating base questions")
         QuestionManager.questionSetArray.removeAll()
         QuestionManager.masterQuestionSetArray.removeAll()
         let basicQuestionSet = QuestionSet.init(
