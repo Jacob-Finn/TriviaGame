@@ -33,7 +33,6 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
     }
     
     
@@ -44,6 +43,11 @@ class ViewController: UIViewController {
             generateBaseQuestions()
             return
         }
+        guard let masterQuestionSetArray = DataManager.loadMasterQuestionArray() else {
+            print("No master was found, this will cause an error later on.")
+            return
+        }
+        QuestionManager.masterQuestionSetArray = masterQuestionSetArray
         print("Found saved questions.")
         QuestionManager.questionSetArray = questionSetArray
         
