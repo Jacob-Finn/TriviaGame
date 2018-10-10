@@ -27,8 +27,8 @@ class QuestionManager {
     // If a QuestionSet is created is created without an answer then the user would never be able to beat it.
     // This check makes sure that an answer does exist before the QuestionSet is created.
     static func addQuestionSet(QuestionSet: QuestionSet) {
-        for Answer in QuestionSet.answerArray {
-            if Answer.isCorrect {
+        for answer in QuestionSet.answerArray {
+            if answer.isCorrect {
                 masterQuestionSetArray.append(QuestionSet)
                 questionSetArray.append(QuestionSet)
             }

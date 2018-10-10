@@ -21,6 +21,7 @@ class CreationViewController: UIViewController {
         case finished
     }
     var currentState: States = .questionEdit
+    var submitionAllowed = true
     
     var displayDescription = ""
     var answerOne = Answer(displayName: "")
@@ -70,14 +71,14 @@ class CreationViewController: UIViewController {
         questionThreeButton.isUserInteractionEnabled = false
         questionFourButton.isUserInteractionEnabled = false
         switchState()
-    
+        
     }
     
     func switchState(){
         switch currentState {
         case .questionEdit:
             informationLabel.text = "Please enter your new question!"
-             submitButton.setTitle("Continue", for: UIControl.State.normal)
+            submitButton.setTitle("Continue", for: UIControl.State.normal)
             if displayDescription != "" {
                 textField.text = displayDescription
             } else {
@@ -85,7 +86,7 @@ class CreationViewController: UIViewController {
             }
         case .answerOne:
             informationLabel.text = "Please enter your first answer!"
-             submitButton.setTitle("Continue", for: UIControl.State.normal)
+            submitButton.setTitle("Continue", for: UIControl.State.normal)
             if answerOne.isCorrect {
                 correctSwitch.isOn = true
             } else {
@@ -98,7 +99,7 @@ class CreationViewController: UIViewController {
             }
         case .answerTwo:
             informationLabel.text = "Please enter your second answer!"
-             submitButton.setTitle("Continue", for: UIControl.State.normal)
+            submitButton.setTitle("Continue", for: UIControl.State.normal)
             if answerTwo.isCorrect {
                 correctSwitch.isOn = true
             } else {
@@ -111,7 +112,7 @@ class CreationViewController: UIViewController {
             }
         case .answerThree:
             informationLabel.text = "Please enter your third answer!"
-             submitButton.setTitle("Continue", for: UIControl.State.normal)
+            submitButton.setTitle("Continue", for: UIControl.State.normal)
             if answerThree.isCorrect {
                 correctSwitch.isOn = true
             } else {
@@ -157,7 +158,7 @@ class CreationViewController: UIViewController {
             return
         }
     }
-
+    
     @IBAction func questionButtonTapped(_ sender: Any) {
         checkIfFinished()
         currentState = .questionEdit
@@ -187,7 +188,7 @@ class CreationViewController: UIViewController {
     
     @IBAction func submitButtonTapped(_ sender: Any) {
         switch currentState {
-            case .questionEdit:
+        case .questionEdit:
             displayDescription = textField.text!
             textField.text = ""
             questionOneButton.isUserInteractionEnabled = true
@@ -237,18 +238,40 @@ class CreationViewController: UIViewController {
             switchState()
             correctSwitch.isOn = false
         case .finished:
-            let newQuestionSet = QuestionSet(firstAnswer: answerOne, secondAnswer: answerTwo, thirdAnswer: answerThree, fourthAnswer: answerFour, displayDescription: displayDescription)
-            QuestionManager.addQuestionSet(QuestionSet: newQuestionSet)
-            DataManager.saveQuestionArray(questionSetArray: QuestionManager.questionSetArray)
-            DataManager.saveMasterQuestionArray(questionSetArray: QuestionManager.masterQuestionSetArray)
-            navigationController?.popViewController(animated: true)
+            if (answerOne.displayName == "" || answerTwo.displayName == "" || answerThree.displayName == "" || answerFour.displayName == "") {
+                submitionAllowed = false
+                let alert = UIAlertController(title: "Error!", message: "One of the answers has been left blank!", preferredStyle: .alert)
+                
+                alert.addAction(UIAlertAction(title: "Return", style: .default, handler: { action in
+                    self.checkIfFinished()
+                    self.currentState = .questionEdit
+                    self.switchState()
+                    
+                }))
+                self.present(alert, animated: true, completion: nil)
+            } else {
+                if (answerOne.isCorrect != true || answerTwo.isCorrect != true || answerThree.isCorrect != true || answerFour.isCorrect != true) {
+                    submitionAllowed = false
+                    let alert = UIAlertController(title: "Error!", message: "At least one answer has to be correct!", preferredStyle: .alert)
+                    
+                    alert.addAction(UIAlertAction(title: "Return", style: .default, handler: { action in
+                        self.checkIfFinished()
+                        self.currentState = .questionEdit
+                        self.switchState()
+                        
+                    }))
+                    self.present(alert, animated: true, completion: nil)
+                } else {
+                    submitionAllowed = true
+                    if submitionAllowed {
+                        let newQuestionSet = QuestionSet(firstAnswer: answerOne, secondAnswer: answerTwo, thirdAnswer: answerThree, fourthAnswer: answerFour, displayDescription: displayDescription)
+                        QuestionManager.addQuestionSet(QuestionSet: newQuestionSet)
+                        DataManager.saveQuestionArray(questionSetArray: QuestionManager.questionSetArray)
+                        DataManager.saveMasterQuestionArray(questionSetArray: QuestionManager.masterQuestionSetArray)
+                        navigationController?.popViewController(animated: true)
+                    }
+                }
+            }
         }
     }
-    
-    
-    
-    
-    
 }
-
-
