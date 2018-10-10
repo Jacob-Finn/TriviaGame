@@ -150,7 +150,12 @@ class ViewController: UIViewController {
     func resetGame() {
         print("resetting game")
         userStats.selectionIndex = 0
-        QuestionManager.questionSetArray = QuestionManager.masterQuestionSetArray
+        guard let masterToLoad = DataManager.loadMasterQuestionArray() else {
+            print("No master save data found! this is problematic and will result in a crash")
+            generateBaseQuestions()
+            return
+        }
+        QuestionManager.questionSetArray = masterToLoad
         userStats.userScore = 0
         setup()
     }
@@ -254,6 +259,7 @@ class ViewController: UIViewController {
         QuestionManager.addQuestionSet(QuestionSet: basicQuestionSetFour)
         DataManager.saveQuestionArray(questionSetArray: QuestionManager.questionSetArray)
         DataManager.saveMasterQuestionArray(questionSetArray: QuestionManager.masterQuestionSetArray)
+        return
     }
     
 }
