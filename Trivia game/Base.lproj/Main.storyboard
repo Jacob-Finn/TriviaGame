@@ -29,6 +29,7 @@
         <!--User Settings Controller-->
         <scene sceneID="ftq-Sl-Mle">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xm1-Kf-0aY" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="ama-cJ-XxP" customClass="UserSettingsController" customModule="Trivia_game" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="n1E-EY-96r">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
@@ -80,7 +81,6 @@
                         <outlet property="userScoreLabel" destination="iBr-po-UKb" id="j7Z-BC-Yhd"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="xm1-Kf-0aY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-618.39999999999998" y="133.5832083958021"/>
         </scene>
