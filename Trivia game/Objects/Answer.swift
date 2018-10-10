@@ -1,12 +1,8 @@
-//
-//  Answer.swift
-//  Trivia game
-//
-//  Created by Jacob Finn on 10/8/18.
-//  Copyright © 2018 Jacob Finn. All rights reserved.
-//
 
 import Foundation
+// Answer is the lifeblood of the QuestionSet, Each QuestionSet is made up of Answers that contain their name and
+// if they are correct answers individually. This is unique in that it allows me to make questions with multiple
+// correct answers, and theoretically I could have as many answers in a QuestionSet as I wanted.
 class Answer: NSObject, NSCoding {
     var displayName: String
     var isCorrect: Bool

@@ -1,12 +1,8 @@
-//
-//  QuestionSet.swift
-//  Trivia game
-//
-//  Created by Jacob Finn on 10/8/18.
-//  Copyright © 2018 Jacob Finn. All rights reserved.
-//
+
 
 import Foundation
+// QuestionSet is almost like a manager, but on an object level. QuestionSet will organize its answers and description to make for a condensed and easy to access package that I can display and manipulate.
+
 class QuestionSet: NSObject, NSCoding {
     let answerOne: Answer
     let answerTwo: Answer
@@ -15,7 +11,7 @@ class QuestionSet: NSObject, NSCoding {
     let displayDescription: String
     var answerArray: [Answer]
     
-    init(firstAnswer answerOne: Answer, secondAnswer answerTwo: Answer, thirdAnswer answerThree: Answer, fourthAnswer answerFour: Answer, displayDescription: String ) {
+    init(firstAnswer answerOne: Answer, secondAnswer answerTwo: Answer, thirdAnswer answerThree: Answer, fourthAnswer answerFour: Answer, displayDescription: String) {
         self.answerOne = answerOne
         self.answerTwo = answerTwo
         self.answerThree = answerThree
@@ -27,7 +23,7 @@ class QuestionSet: NSObject, NSCoding {
         self.answerArray.append(answerFour)
         self.displayDescription = displayDescription
     }
-    init(answerArray: [Answer], displayDescription: String ) {
+    init(answerArray: [Answer], displayDescription: String) {
         self.answerArray = answerArray
         self.answerOne = answerArray[0]
         self.answerTwo = answerArray[1]

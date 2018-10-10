@@ -1,12 +1,13 @@
-//
-//  CreationViewController.swift
-//  Trivia game
-//
-//  Created by Jacob Finn on 10/8/18.
-//  Copyright © 2018 Jacob Finn. All rights reserved.
-//
+
 
 import UIKit
+
+/* The CreationViewController is probably one of the best viewControllers I have made so far and is very
+ understandable and easily accessed. It guides the users through the creation and makes it easy to tell what
+ parts of a QuestionSet the user can edit at a time, and it allows user to go back and modify their answer if they
+ wanted, and it allows for answers to easily be set as incorrect or correct.
+ 
+ */
 
 class CreationViewController: UIViewController {
     
@@ -32,7 +33,8 @@ class CreationViewController: UIViewController {
     
     //-------- --------- StoryBoard --------- ----------//
     
-    // The views are what the buttons are contained it
+    // The views are what the buttons are contained in. Originally these would've changed colors on selection
+    // but this idea was changed later.
     @IBOutlet weak var displayDescriptionView: UIView!
     @IBOutlet weak var questionOneView: UIView!
     @IBOutlet weak var questionTwoView: UIView!
@@ -58,9 +60,6 @@ class CreationViewController: UIViewController {
     
     
     
-    // ******
-    // This script needs heavy optimization! Come back to it later and make new functions!!!
-    // ******
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.barStyle = UIBarStyle.blackTranslucent
@@ -240,7 +239,9 @@ class CreationViewController: UIViewController {
         case .finished:
             let newQuestionSet = QuestionSet(firstAnswer: answerOne, secondAnswer: answerTwo, thirdAnswer: answerThree, fourthAnswer: answerFour, displayDescription: displayDescription)
             QuestionManager.addQuestionSet(QuestionSet: newQuestionSet)
-            DataManager.saveData(questionSetArray: QuestionManager.questionSetArray)
+            DataManager.saveQuestionArray(questionSetArray: QuestionManager.questionSetArray)
+            DataManager.saveMasterQuestionArray(questionSetArray: QuestionManager.masterQuestionSetArray)
+            navigationController?.popViewController(animated: true)
         }
     }
     

@@ -17,6 +17,8 @@
 		7BD87E70216BCF4C00CDD035 /* QuestionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD87E6F216BCF4C00CDD035 /* QuestionManager.swift */; };
 		7BD87E75216BE07F00CDD035 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD87E74216BE07F00CDD035 /* DataManager.swift */; };
 		7BD87E77216C414200CDD035 /* CreationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD87E76216C414200CDD035 /* CreationViewController.swift */; };
+		7BD87E97216D385700CDD035 /* UserSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD87E96216D385700CDD035 /* UserSettingsController.swift */; };
+		7BD87E9B216D395900CDD035 /* UserStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD87E9A216D395900CDD035 /* UserStats.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +34,8 @@
 		7BD87E6F216BCF4C00CDD035 /* QuestionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionManager.swift; sourceTree = "<group>"; };
 		7BD87E74216BE07F00CDD035 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		7BD87E76216C414200CDD035 /* CreationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreationViewController.swift; sourceTree = "<group>"; };
+		7BD87E96216D385700CDD035 /* UserSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettingsController.swift; sourceTree = "<group>"; };
+		7BD87E9A216D395900CDD035 /* UserStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStats.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +77,7 @@
 				7BB70C16216BC72500A47814 /* LaunchScreen.storyboard */,
 				7BB70C19216BC72500A47814 /* Info.plist */,
 				7BD87E76216C414200CDD035 /* CreationViewController.swift */,
+				7BD87E96216D385700CDD035 /* UserSettingsController.swift */,
 			);
 			path = "Trivia game";
 			sourceTree = "<group>";
@@ -82,6 +87,7 @@
 			children = (
 				7BD87E6B216BCD6400CDD035 /* Answer.swift */,
 				7BD87E6D216BCDD600CDD035 /* QuestionSet.swift */,
+				7BD87E9A216D395900CDD035 /* UserStats.swift */,
 			);
 			path = Objects;
 			sourceTree = "<group>";
@@ -169,9 +175,11 @@
 				7BD87E6E216BCDD600CDD035 /* QuestionSet.swift in Sources */,
 				7BD87E75216BE07F00CDD035 /* DataManager.swift in Sources */,
 				7BD87E6C216BCD6400CDD035 /* Answer.swift in Sources */,
+				7BD87E97216D385700CDD035 /* UserSettingsController.swift in Sources */,
 				7BB70C10216BC72100A47814 /* ViewController.swift in Sources */,
 				7BD87E70216BCF4C00CDD035 /* QuestionManager.swift in Sources */,
 				7BB70C0E216BC72100A47814 /* AppDelegate.swift in Sources */,
+				7BD87E9B216D395900CDD035 /* UserStats.swift in Sources */,
 				7BD87E77216C414200CDD035 /* CreationViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
