@@ -33,33 +33,39 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
     }
     
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         guard let questionSetArray = DataManager.loadQuestionArray() else {
-            print("Nothing found create default")
+            print("Nothing found creating default")
             generateBaseQuestions()
             return
         }
+        print("Found saved questions.")
         QuestionManager.questionSetArray = questionSetArray
+        
+        
         guard let savedUserStats = DataManager.loadUserStats() else  {
             userStats.selectionIndex = 0
             userStats.userScore = 0
             print("No save data found")
-            if QuestionManager.questionSetArray.count == 0 { //If somehow the data base still manages to get wiped
-            generateBaseQuestions() // we will generate the base questions again.
-            setup()
-            } else {
-                setup()
-            }
             return
         }
         userStats = savedUserStats
         print("Found saved data")
-        setup()
-        DataManager.saveQuestionArray(questionSetArray: QuestionManager.questionSetArray)
+        if QuestionManager.questionSetArray.count == 0 || QuestionManager.masterQuestionSetArray.count == 0 { //If somehow the data base still manages to get wiped
+            generateBaseQuestions() // we will generate the base questions again.
+            setup()
+        } else {
+            setup()
+        }
+        DataManager.saveQuestionArray(questionSetArray: QuestionManager.questionSetArray) // A save just to be sure nothing happens.
+        print("Current score \(userStats.userScore)")
+        print("Current questions left \(QuestionManager.questionSetArray.count)")
+        print("Current master left \(QuestionManager.masterQuestionSetArray.count)")
     }
     
     
@@ -70,7 +76,6 @@ class ViewController: UIViewController {
      correct. Thus, you can have multiple correct answers in a question if you wanted to.
      */
     func setup() {
-        print(userStats.selectionIndex)
         if userStats.selectionIndex <= (QuestionManager.questionSetArray.count - 1) {
             self.view.backgroundColor = UIColor.white
             self.navigationController?.navigationBar.barTintColor  = UIColor.white
@@ -105,6 +110,7 @@ class ViewController: UIViewController {
                     }
                 }
             }
+            DataManager.saveQuestionArray(questionSetArray: QuestionManager.questionSetArray)
             fadeIn()
         }
     }
@@ -142,6 +148,7 @@ class ViewController: UIViewController {
         }
     }
     func resetGame() {
+        print("resetting game")
         userStats.selectionIndex = 0
         QuestionManager.questionSetArray = QuestionManager.masterQuestionSetArray
         userStats.userScore = 0
@@ -157,25 +164,33 @@ class ViewController: UIViewController {
         QuestionManager.questionSetArray.remove(at: userStats.selectionIndex)
         let questionsLeft = QuestionManager.questionSetArray.count
         if questionsLeft == 0 {
-            let alert = UIAlertController(title: "You won!", message: "Final score: \(userStats.userScore)", preferredStyle: UIAlertController.Style.alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
-                switch action.style{
-                case .default:
-                    self.resetGame()
-                case .cancel:
-                    print("cancel")
-                case .destructive:
-                    print("destructive")
-                }}))
-            self.present(alert, animated: true, completion: nil)
+            playerWon()
         } else {
             userStats.selectionIndex = Int(arc4random_uniform(UInt32(QuestionManager.questionSetArray.count)))
             DataManager.saveQuestionArray(questionSetArray: QuestionManager.questionSetArray)
             DataManager.saveUserStats(userStats: userStats)
             print("correct")
+            print("Current score \(userStats.userScore)")
+            print("Current questions left \(QuestionManager.questionSetArray.count)")
+            print("Current master left \(QuestionManager.masterQuestionSetArray.count)")
             fadeOut()
         }
     }
+    
+    func playerWon() {
+        let alert = UIAlertController(title: "You won!", message: "Final score: \(userStats.userScore)", preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+            switch action.style{
+            case .default:
+                self.resetGame()
+            case .cancel:
+                print("cancel")
+            case .destructive:
+                print("destructive")
+            }}))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     func setWrongColor() {
         view.backgroundColor = UIColor.red
         self.navigationController?.navigationBar.barTintColor  = UIColor.red
@@ -205,8 +220,9 @@ class ViewController: UIViewController {
     
     
     
-    
     func generateBaseQuestions () {
+        QuestionManager.questionSetArray.removeAll()
+        QuestionManager.masterQuestionSetArray.removeAll()
         let basicQuestionSet = QuestionSet.init(
             firstAnswer: Answer.init(displayName: "tester1", isCorrect: true),
             secondAnswer: Answer.init(displayName: "tester2"),

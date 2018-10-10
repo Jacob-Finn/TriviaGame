@@ -49,6 +49,7 @@ class UserSettingsController: UIViewController {
         }
         if userWarned && userConfirmed {
         userStats.selectionIndex = 0
+        userStats.userScore = 0
         resetButton.setTitle("Data reset", for: .normal)
         DataManager.saveUserStats(userStats: userStats)
         resetButton.isUserInteractionEnabled = false
